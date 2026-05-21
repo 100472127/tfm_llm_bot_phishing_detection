@@ -1,4 +1,4 @@
-# Trabajo de Fin de Grado - Desarrollo de un Bot Basado en LLMS para la Detección y Alerta Temprana de Mensajes Potencialmente de Phishing
+# Trabajo de Fin de Master - Desarrollo de un Bot Basado en LLMS para la Detección y Alerta Temprana de Mensajes Potencialmente de Phishing
 
 Este repositorio contiene el código fuente del Trabajo de Fin de Máster titulado "Desarrollo de un Bot Basado en LLMS para la Detección y Alerta Temprana de Mensajes Potencialmente de Phishing", desarrollado por Diego Montero Solano en la Universidad Carlos III de Madrid.
 
