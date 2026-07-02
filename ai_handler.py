@@ -35,7 +35,7 @@ class PhishingAI:
 
     def _inicializar_cliente(self):
         """Configura el cliente específico según el proveedor."""
-        if self.provider == "gemini":
+        if self.provider == "google":
             if genai is None:
                 raise ImportError("La librería 'google.generativeai' no está instalada.")
             self.client = genai.Client(api_key=self.api_key)
@@ -70,7 +70,8 @@ class PhishingAI:
             "### TAXONOMÍA DE RIESGO ###\n"
             "1. NIVEL: BAJO -> Mensajes de remitentes conocidos, sin urgencia artificial, sin enlaces sospechosos o con enlaces a dominios oficiales verificados.\n"
             "2. NIVEL: MEDIO -> Mensajes con lenguaje persuasivo, errores gramaticales leves, o enlaces que usan acortadores (bit.ly, t.co) pero sin contenido malicioso evidente.\n"
-            "3. NIVEL: ALTO -> Suplantación de identidad clara (spoofing), urgencia extrema ('cuenta bloqueada'), enlaces que imitan dominios oficiales (typosquatting como 'g00gle.com') o solicitudes de credenciales/pagos.\n\n"
+            "3. NIVEL: ALTO -> Suplantación de identidad clara (spoofing), urgencia extrema ('cuenta bloqueada'), enlaces que imitan dominios oficiales \
+            (typosquatting como 'g00gle.com') o solicitudes de credenciales/pagos.\n\n"
             
             "### FORMATO DE RESPUESTA OBLIGATORIO ###\n"
             "Solo responde en el siguiente formato, sin texto introductorio ni conclusiones:\n"
@@ -95,12 +96,12 @@ class PhishingAI:
 
         while intento_actual < max_intentos:
             try:
-                if self.provider == "gemini":
-                    return await self._query_gemini(prompt)
+                if self.provider == "google":
+                    return await self._query_google(prompt)
                 elif self.provider == "openai":
                     return await self._query_openai(prompt)
-                elif self.provider == "claude":
-                    return await self._query_claude(prompt)  
+                elif self.provider == "anthropic":
+                    return await self._query_anthropic(prompt)  
 
             except Exception as e:    
                 intento_actual += 1
@@ -116,7 +117,7 @@ class PhishingAI:
 
     # --- Funciones para hacer las llamadas a las APIs con las IAs ---
 
-    async def _query_gemini(self, prompt):
+    async def _query_google(self, prompt):
         response = await self.client.aio.models.generate_content(
             model=self.model_name,
             contents=prompt
@@ -131,7 +132,7 @@ class PhishingAI:
         )
         return response.choices[0].message.content
 
-    async def _query_claude(self, prompt):
+    async def _query_anthropic(self, prompt):
         response = await self.client.messages.create(
             model=self.model_name,
             max_tokens=500, # Aumentado de 10 a 500

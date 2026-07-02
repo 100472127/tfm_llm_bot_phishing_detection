@@ -30,7 +30,7 @@ def obtener_configuracion_manual():
     config = {}
     config["bot_platform"] = input("1. Plataforma (telegram/discord): ").lower().strip()
     config["bot_token"] = input("2. Token del Bot: ").strip()
-    config["ai_provider"] = input("3. Proveedor de IA (gemini/openai/claude): ").lower().strip()
+    config["ai_provider"] = input("3. Proveedor de IA (google/openai/anthropic): ").lower().strip()
     config["ai_api_key"] = input("4. API Key de la IA: ").strip()
     config["ai_model"] = input("5. Modelo (ej: gemini-1.5-flash): ").strip()
     return config
@@ -78,11 +78,11 @@ def main():
     # 1. Definición de reglas
     claves_necesarias = ["ai_api_key", "ai_provider", "ai_model", "bot_platform", "bot_token"]
     valid_bot_platforms = ["telegram", "discord"]
-    valid_ai_providers = ["gemini", "openai", "claude"]
+    valid_ai_providers = ["google", "openai", "anthropic"]
     valid_ai_models = {
-        "gemini": ["gemini-1.5-flash", "gemini-2.5-flash", "gemini-pro"],
+        "google": ["gemini-1.5-flash", "gemini-2.5-flash", "gemini-pro"],
         "openai": ["gpt-3.5-turbo", "gpt-4", "gpt-4o"],
-        "claude": ["claude-2", "claude-3-opus", "claude-3-sonnet"]
+        "anthropic": ["claude-2", "claude-3-opus", "claude-3-sonnet"]
     }
 
     # 2. Comprobar que no faltan campos
